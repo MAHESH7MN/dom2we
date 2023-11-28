@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #scoreBox {
+            width: 200px;
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        #minBox, #maxBox {
+            width: 50px;
+            margin: 10px;
+            font-size: 18px;
+        }
+        .red{
+            background-color: red;
+        }
+        .iinput{
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Leaderboard</h2>
+
+    <button onclick="appendToScore(1)">1</button>
+    <button onclick="appendToScore(2)">2</button>
+    <button onclick="appendToScore(3)">3</button>
+    <br>
+    <button onclick="appendToScore(4)">4</button>
+    <button onclick="appendToScore(5)">5</button>
+    <button onclick="appendToScore(6)">6</button>
+    <br>
+    <button onclick="appendToScore(7)">7</button>
+    <button onclick="appendToScore(8)">8</button>
+    <button onclick="appendToScore(9)">9</button>
+    <br>
+    <button onclick="appendToScore(0)">0</button>
+
+    <br>
+    <button onclick="enterScore()">ENTER</button>
+
+    <div>
+        <label>Score:</label>
+        <input type="text" id="scoreBox" readonly>
+    </div>
+
+    <div>
+        <label>MIN:</label>
+        <input class="red" type="text" id="minBox" readonly>
+    </div>
+
+    <div>
+        <label>MAX:</label>
+        <input class="iinput" type="text" id="maxBox" readonly>
+    </div>
+
+    <script>
+        var currentScore = '';
+
+        function appendToScore(number) {
+            currentScore += number;
+            document.getElementById('scoreBox').value = currentScore;
+        }
+
+        function enterScore() {
+            var score = parseInt(currentScore);
+            var minScore = parseInt(document.getElementById('minBox').value);
+            var maxScore = parseInt(document.getElementById('maxBox').value);
+
+            if (isNaN(score)) {
+                alert('Please enter a valid score.');
+                return;
+            }
+
+            if (isNaN(minScore) || score < minScore) {
+                document.getElementById('minBox').value = score;
+            }
+
+            if (isNaN(maxScore) || score > maxScore) {
+                document.getElementById('maxBox').value = score;
+            }
+
+            // Reset the score box
+            currentScore = '';
+            document.getElementById('scoreBox').value = currentScore;
+        }
+    </script>
+</body>
+</html>
